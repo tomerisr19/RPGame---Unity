@@ -4,51 +4,71 @@ using UnityEngine;
 using TMPro;
 using System;
 
+namespace UnityStandardAssets.Characters.FirstPerson
+{
+
 [Serializable]
 public class DialogueOBJ
 {
     public string[] Dialogues;
 }
-public class DialogueObject : MonoBehaviour
-{
-    private PlayerData data;
-
-    public TextMeshProUGUI DialogueText;
-
-    private int currecntDialougeNum = 0;
-    private DialogueOBJ curDialogue = null;
-
-    [Header("Dialogue objects")]
-    public DialogueOBJ dialogue1;
-
-    private void Start()
+    public class DialogueObject : MonoBehaviour
     {
-        data = FindObjectOfType<PlayerData>();
-    }
-    private void OnEnable()
-    {
-        PlayDialogue(dialogue1);
-        curDialogue = dialogue1;
-    }
+        private PlayerData data;
 
-    private void PlayDialogue(DialogueOBJ tempObj)
-    {
-        if (currecntDialougeNum < tempObj.Dialogues.Length)
+        public TextMeshProUGUI DialogueText;
+        public RigidbodyFirstPersonController rigid;
+
+        private int currecntDialougeNum = 0;
+        private DialogueOBJ curDialogue = null;
+
+        [Header("Dialogue objects")]
+        public DialogueOBJ dialogue1;
+
+        private void Start()
         {
-            DialogueText.text = tempObj.Dialogues[currecntDialougeNum];
+            data = FindObjectOfType<PlayerData>();
         }
-        else
+        //private void OnEnable()
+        //{
+        //    PlayDialogue(dialogue1);
+        //    curDialogue = dialogue1;
+        //}
+
+        //private void PlayDialogue(DialogueOBJ tempObj)
+        //{
+        //    if (currecntDialougeNum < tempObj.Dialogues.Length)
+        //    {
+        //        DialogueText.text = tempObj.Dialogues[currecntDialougeNum];
+        //    }
+        //    else
+        //    {
+        //        rigid.enabled = true;
+        //        Cursor.lockState = CursorLockMode.Locked;
+        //        Cursor.visible = false;
+        //        curDialogue = null;
+        //        currecntDialougeNum = 0;
+
+
+        //        this.gameObject.SetActive(false);
+        //    }
+
+        //}
+        public void next()
         {
-            //end the dialouge
-        }
-        
-    }
-    public void next()
-    {
-        if (curDialogue != null)
-        {
-            currecntDialougeNum++;
-            PlayDialogue(curDialogue);
+            rigid.enabled = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            curDialogue = null;
+            currecntDialougeNum = 0;
+
+
+            this.gameObject.SetActive(false);
+            //if (curDialogue != null)
+            //{
+            //    currecntDialougeNum++;
+            //    PlayDialogue(curDialogue);
+            //}
         }
     }
 }

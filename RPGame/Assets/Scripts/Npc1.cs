@@ -1,31 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Npc1 : MonoBehaviour
+namespace UnityStandardAssets.Characters.FirstPerson
 {
-    public GameObject triggerText;
-    public GameObject DialogObject;
 
-    private void Start()
+    public class Npc1 : MonoBehaviour
     {
-        triggerText.SetActive(false);
-        DialogObject.SetActive(false);
-    }
-    void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Player")
+        public GameObject triggerText;
+        public GameObject DialogObject;
+        public RigidbodyFirstPersonController rigid;
+
+        void OnTriggerStay(Collider other)
         {
-            triggerText.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.E))
+            if (other.tag == "Player")
             {
-                DialogObject.SetActive(true);
-                other.gameObject.GetComponent<PlayerData>().DialougeNumber = 1;
+                triggerText.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    DialogObject.SetActive(true);
+                    //other.gameObject.GetComponent<PlayerData>().DialougeNumber = 1;
+                    rigid.enabled = false;
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
             }
         }
-    }
-    void OnTriggerExit(Collider other)
-    {
-        triggerText.SetActive(false);
+        void OnTriggerExit(Collider other)
+        {
+            triggerText.SetActive(false);
+        }
     }
 }
