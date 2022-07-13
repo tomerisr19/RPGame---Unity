@@ -25,6 +25,9 @@ public class DialogueOBJ
         [Header("Dialogue objects")]
         public DialogueOBJ dialogue1;
 
+        [Header("NPCS")]
+        public Npc1 npc1;
+
         private void Start()
         {
             data = FindObjectOfType<PlayerData>();
@@ -59,9 +62,8 @@ public class DialogueOBJ
             rigid.enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            curDialogue = null;
+           // curDialogue = null;
             currecntDialougeNum = 0;
-
 
             this.gameObject.SetActive(false);
             //if (curDialogue != null)

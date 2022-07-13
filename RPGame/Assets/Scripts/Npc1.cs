@@ -22,6 +22,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     rigid.enabled = false;
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
+                    triggerText.SetActive(false);
                 }
             }
         }
