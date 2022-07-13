@@ -19,9 +19,6 @@ public class DialogueOBJ
         public TextMeshProUGUI DialogueText;
         public RigidbodyFirstPersonController rigid;
 
-        private int currecntDialougeNum = 0;
-        private DialogueOBJ curDialogue = null;
-
         [Header("Dialogue objects")]
         public DialogueOBJ dialogue1;
 
@@ -63,7 +60,6 @@ public class DialogueOBJ
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
            // curDialogue = null;
-            currecntDialougeNum = 0;
 
             this.gameObject.SetActive(false);
             //if (curDialogue != null)

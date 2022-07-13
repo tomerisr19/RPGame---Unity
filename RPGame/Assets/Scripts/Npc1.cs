@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 namespace UnityStandardAssets.Characters.FirstPerson
 {
 
@@ -15,6 +16,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (other.tag == "Player")
             {
                 triggerText.SetActive(true);
+                triggerText.GetComponent<TextMeshProUGUI>().text = "Lets take the cassle back !";
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     DialogObject.SetActive(true);

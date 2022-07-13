@@ -44,7 +44,7 @@ public class SkeltonAI : MonoBehaviour
         {
             isAttaking = true;
             anim.SetBool("Attak", true);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.2f);
             playerData.TakeDamage(damgeTaken);
             isAttaking = false;
         }

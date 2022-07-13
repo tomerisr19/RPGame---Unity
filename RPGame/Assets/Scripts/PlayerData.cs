@@ -32,7 +32,7 @@ public class PlayerData : MonoBehaviour
         healthSlider.value = curHealth;
         if (curHealth <= 0)
         {
-            Application.LoadLevel("MainScene");
+            SceneManager.LoadScene("MainScene");
         }
         healthText.text = curHealth.ToString("F0") + "/" + maxHealth.ToString("F0");
     }
