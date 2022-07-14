@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+using TMPro;
+
 
 public class SkeltonAI : MonoBehaviour
 {
@@ -10,6 +13,13 @@ public class SkeltonAI : MonoBehaviour
     public Animator anim;
 
     private PlayerData playerData;
+
+    public Slider skeltonHealthSlider;
+
+    public float maxHealth;
+    public float curHealth;
+
+
 
     private bool isAttaking;
     private float updateTime = 0;
@@ -20,6 +30,9 @@ public class SkeltonAI : MonoBehaviour
     {
         nav = GetComponent<NavMeshAgent>();
         playerData = FindObjectOfType<PlayerData>();
+        skeltonHealthSlider.maxValue = maxHealth;
+        curHealth = maxHealth;
+        skeltonHealthSlider.value = curHealth;
     }
 
     private void Update()
@@ -36,6 +49,12 @@ public class SkeltonAI : MonoBehaviour
             anim.SetBool("Attak", false);
             isAttaking = false;
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        curHealth -= damage;
+        skeltonHealthSlider.value = curHealth;
     }
 
     IEnumerator Attak()
