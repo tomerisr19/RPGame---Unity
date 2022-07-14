@@ -8,6 +8,13 @@ public class WeaponScript : MonoBehaviour
 
     public bool isAttaking = false;
 
+    private hitBox hitBox;
+
+    private void Start()
+    {
+        hitBox = FindObjectOfType<hitBox>();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -20,6 +27,7 @@ public class WeaponScript : MonoBehaviour
     {
         if (!isAttaking)
         {
+            hitBox.Attak();
             isAttaking = true;
             anim.SetBool("isAttaking", true);
             yield return new WaitForSeconds(0.35f);
@@ -28,4 +36,6 @@ public class WeaponScript : MonoBehaviour
         }
         
     }
+
+
 }
