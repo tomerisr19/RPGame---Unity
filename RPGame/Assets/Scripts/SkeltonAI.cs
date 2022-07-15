@@ -76,12 +76,16 @@ public class SkeltonAI : MonoBehaviour
     }
     private void LateUpdate()
     {
-        transform.LookAt(player.transform);
-        if (updateTime > 2)
+        float dist = Vector3.Distance(this.transform.position, player.transform.position);
+        if (dist <= 30f)
         {
-            nav.destination = player.transform.position;
-            updateTime = 0;
-        }
+            transform.LookAt(player.transform);
+            if (updateTime > 2)
+            {
+                nav.destination = player.transform.position;
+                updateTime = 0;
+            }
+        }      
     }
 
 }
