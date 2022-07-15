@@ -30,7 +30,7 @@ public class WeaponScript : MonoBehaviour
             hitBox.Attak();
             isAttaking = true;
             anim.SetBool("isAttaking", true);
-            yield return new WaitForSeconds(0.7f);
+            yield return new WaitForSeconds(0.35f);
             anim.SetBool("isAttaking", false);
             isAttaking = false;
         }

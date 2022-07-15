@@ -55,6 +55,11 @@ public class SkeltonAI : MonoBehaviour
     {
         curHealth -= damage;
         skeltonHealthSlider.value = curHealth;
+        if (curHealth <= 0)
+        {
+            // mashuSheOseSheOONofel.SetActive
+        }
+
     }
 
     IEnumerator Attak()
