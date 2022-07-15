@@ -4,11 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PlayerData : MonoBehaviour
 {
     public int questNumber;
     public int DialougeNumber;
+
+    private UIManager uiManager;
 
     [Header("PlayerStats")]
      public float maxHealth;
@@ -20,6 +23,7 @@ public class PlayerData : MonoBehaviour
 
     private void Start()
     {
+        uiManager = FindObjectOfType<UIManager>();
         healthSlider.maxValue = maxHealth;
         curHealth = maxHealth;
         healthSlider.value = curHealth;
@@ -32,9 +36,15 @@ public class PlayerData : MonoBehaviour
         healthSlider.value = curHealth;
         if (curHealth <= 0)
         {
-            SceneManager.LoadScene("MainScene");
+            uiManager.DeathScreenActive();
         }
         healthText.text = curHealth.ToString("F0") + "/" + maxHealth.ToString("F0");
+    }
+  
+
+    public void Respawn()
+    {
+        SceneManager.LoadScene("MainScene");
     }
     public void Heal(float Heal)
     {
