@@ -11,7 +11,7 @@ public class hitBox : MonoBehaviour
     private SkeltonAI skel;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "skeleton")
+        if (other.tag == "Skeleton")
         {
             isInField = true;
             skel = other.GetComponent<SkeltonAI>();
@@ -21,7 +21,7 @@ public class hitBox : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "skeleton")
+        if (other.tag == "Skeleton")
         {
             isInField = false;
             skel = null;
