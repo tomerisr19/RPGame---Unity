@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using TMPro;
-
+using System;
 
 public class SkeltonAI : MonoBehaviour
 {
@@ -19,9 +19,13 @@ public class SkeltonAI : MonoBehaviour
     public float maxHealth;
     public float curHealth;
 
+    private bool isDie = false;
+
 
 
     private bool isAttaking;
+
+
     private float updateTime = 0;
     public float damgeTaken = 10;
     
@@ -49,7 +53,21 @@ public class SkeltonAI : MonoBehaviour
             anim.SetBool("Attak", false);
             isAttaking = false;
         }
+        if (curHealth <= 0)
+        {
+            Die();
+        }
     }
+
+    private void Die()
+    {
+        anim.SetTrigger("die");
+        Destroy(gameObject, 5);
+        isDie = true;
+        nav.enabled = false;
+    }
+
+   
 
     public void TakeDamage(float damage)
     {
@@ -59,7 +77,6 @@ public class SkeltonAI : MonoBehaviour
         {
             // mashuSheOseSheOONofel.SetActive
         }
-
     }
 
     IEnumerator Attak()
@@ -80,7 +97,7 @@ public class SkeltonAI : MonoBehaviour
         if (dist <= 30f)
         {
             transform.LookAt(player.transform);
-            if (updateTime > 2)
+            if (updateTime > 2 && !isDie)
             {
                 nav.destination = player.transform.position;
                 updateTime = 0;
