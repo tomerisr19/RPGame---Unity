@@ -62,9 +62,9 @@ public class SkeltonAI : MonoBehaviour
     private void Die()
     {
         anim.SetTrigger("die");
-        Destroy(gameObject, 5);
-        isDie = true;
         nav.enabled = false;
+        Destroy(gameObject, 2);
+        isDie = true;
     }
 
    
