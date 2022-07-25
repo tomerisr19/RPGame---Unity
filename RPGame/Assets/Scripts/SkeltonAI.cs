@@ -19,10 +19,7 @@ public class SkeltonAI : MonoBehaviour
     public float maxHealth;
     public float curHealth;
 
-    private bool isDie = false;
-
-
-
+    public bool isDie = false;
     private bool isAttaking;
 
 
