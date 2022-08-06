@@ -15,8 +15,8 @@ public class ErikaNPC : MonoBehaviour
 
     private SkeltonAI skeltonAI;
 
-    private bool isWalking;
-    private bool isShooting;
+    public bool isDie = false;
+    private bool isAttaking;
 
     private float updateTime = 0;
 
@@ -30,67 +30,48 @@ public class ErikaNPC : MonoBehaviour
     private void Update()
     {
         updateTime += Time.deltaTime;
-        if (skeltonAI.isDie == false)
+        if (skeltonAI.isDie)
         {
-            
-            if (Input.GetKeyDown(KeyCode.T) && !skeltonAI.isDie)
+            nav.enabled = false;
+        }
+        else
+        {
+            float dist = Vector3.Distance(this.transform.position, skelton.transform.position);
+            if (dist <= 5)
             {
-                nav.destination = skelton.transform.position;
                 StartCoroutine(Attak());
             }
             else
             {
-                anim.SetBool("isShooting", false);
-                isShooting = false;
+                anim.SetBool("Attak", false);
+                isAttaking = false;
             }
-        }
-        
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            float distFromPlayer = Vector3.Distance(this.transform.position, player.transform.position);
-            anim.SetBool("isWalking", true);
-            if (distFromPlayer <= 30f)
-            {
-                transform.LookAt(player.transform);
-                if (updateTime > 2)
-                {
-                    nav.destination = player.transform.position;
-                    updateTime = 0;
-                }
-            }
-
-        }
-        
-    }
+        }        
+    }  
 
     IEnumerator Attak()
     {
-        if (!isShooting)
-        {            
-            isShooting = true;
-            anim.SetBool("isShooting", true);
-            yield return new WaitForSeconds(1.2f);
-            skeltonAI.TakeDamage(20);
-            isShooting = false;
+        if (!isAttaking)
+        {
+            isAttaking = true;
+            anim.SetBool("Attak", true);
+            skeltonAI.TakeDamage(50);
+            yield return new WaitForSeconds(2f);         
+            isAttaking = false;
         }
-
     }
-
     private void LateUpdate()
     {
-        if (skeltonAI.isDie == false)
+        if (!skeltonAI.isDie)
         {
-            float dist = Vector3.Distance(this.transform.position, skelton.transform.position);
-            if (dist <= 30f)
+            transform.LookAt(skelton.transform);
+            if (updateTime > 2)
             {
-                transform.LookAt(skelton.transform);
-                if (updateTime > 2)
-                {
-                    nav.destination = skelton.transform.position;
-                    updateTime = 0;
-                }
+                nav.destination = skelton.transform.position;
+                updateTime = 0;
             }
-        }
+        }          
         
     }
+
 }

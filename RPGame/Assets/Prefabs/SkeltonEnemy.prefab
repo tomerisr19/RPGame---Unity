@@ -388,6 +388,7 @@ MonoBehaviour:
   skeltonHealthSlider: {fileID: 6359566396529109438}
   maxHealth: 100
   curHealth: 0
+  isDie: 0
   damgeTaken: 10
 --- !u!1 &9007921069623903221
 GameObject:
