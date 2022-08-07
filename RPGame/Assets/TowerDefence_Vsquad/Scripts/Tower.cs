@@ -16,7 +16,7 @@ public class Tower : MonoBehaviour {
     public float shootDelay;
     bool isShoot;
     public Animator anim_2;
-    public TowerHP TowerHp;    
+    //public TowerHP TowerHp;    
     private float homeY;
 
     // for Catcher tower 
@@ -25,7 +25,7 @@ public class Tower : MonoBehaviour {
     {
         anim_2 = GetComponent<Animator>();
         homeY = LookAtObj.transform.localRotation.eulerAngles.y;
-        TowerHp = Towerbug.GetComponent<TowerHP>();
+        //TowerHp = Towerbug.GetComponent<TowerHP>();
     }
            
 
