@@ -15,6 +15,11 @@ public class ErikaNPC : MonoBehaviour
 
     private SkeltonAI skeltonAI;
 
+    public Slider NPCHealthSlider;
+
+    public float maxHealth;
+    public float curHealth;
+
     public bool isDie = false;
     private bool isAttaking;
 
@@ -25,43 +30,70 @@ public class ErikaNPC : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         skeltonAI = FindObjectOfType<SkeltonAI>();
+        NPCHealthSlider.maxValue = maxHealth;
+        curHealth = maxHealth;
+        NPCHealthSlider.value = curHealth;
     }
 
     private void Update()
     {
         updateTime += Time.deltaTime;
-        if (skeltonAI.isDie)
+        if (Input.GetKeyDown(KeyCode.V))
         {
-            nav.enabled = false;
+            anim.Play("Stable Sword Outward Slash");
+            curHealth -= 3;
+            NPCHealthSlider.value = curHealth;
         }
-        else
+        if (Input.GetKeyDown(KeyCode.C))
         {
-            float dist = Vector3.Distance(this.transform.position, skelton.transform.position);
-            if (dist <= 5)
-            {
-                StartCoroutine(Attak());
-            }
-            else
-            {
-                anim.SetBool("Attak", false);
-                isAttaking = false;
-            }
-        }        
-    }  
-
-    IEnumerator Attak()
-    {
-        if (!isAttaking)
-        {
-            isAttaking = true;
-            anim.SetBool("Attak", true);
-            skeltonAI.TakeDamage(50);
-            yield return new WaitForSeconds(2f);         
-            isAttaking = false;
+            anim.Play("Walking");
         }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            Die();
+        }
+        
+        //if (skeltonAI.isDie)
+        //{
+        //    nav.enabled = false;
+        //}
+        //else
+        //{
+        //    float dist = Vector3.Distance(this.transform.position, skelton.transform.position);
+        //    if (dist <= 5)
+        //    {
+        //        StartCoroutine(Attak());
+        //    }
+        //    else
+        //    {
+        //        anim.Play("Attak");
+        //        isAttaking = false;
+        //    }
+        //}        
     }
+
+    private void Die()
+    {
+        anim.SetTrigger("die");
+        nav.enabled = false;
+        Destroy(gameObject, 2);
+        isDie = true;
+    }
+
+    //IEnumerator Attak()
+    //{
+    //    if (!isAttaking)
+    //    {
+    //        isAttaking = true;
+    //        anim.Play("Attak");
+    //        skeltonAI.TakeDamage(50);
+    //        yield return new WaitForSeconds(2f);         
+    //        isAttaking = false;
+    //    }
+    //}
     private void LateUpdate()
     {
+
         if (!skeltonAI.isDie)
         {
             transform.LookAt(skelton.transform);

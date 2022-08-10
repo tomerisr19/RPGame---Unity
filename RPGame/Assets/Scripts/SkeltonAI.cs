@@ -12,6 +12,8 @@ public class SkeltonAI : MonoBehaviour
     public GameObject player;
     public Animator anim;
 
+    
+
     private PlayerData playerData;
 
     public Slider skeltonHealthSlider;
@@ -83,15 +85,17 @@ public class SkeltonAI : MonoBehaviour
             isAttaking = true;
             anim.SetBool("Attak", true);
             yield return new WaitForSeconds(1.2f);
-            playerData.TakeDamage(0);
+            playerData.TakeDamage(7);
             isAttaking = false;
         }
         
     }
+
+    
     private void LateUpdate()
     {
         float dist = Vector3.Distance(this.transform.position, player.transform.position);
-        if (dist <= 30f)
+        if (dist <= 70f)
         {
             transform.LookAt(player.transform);
             if (updateTime > 2 && !isDie)

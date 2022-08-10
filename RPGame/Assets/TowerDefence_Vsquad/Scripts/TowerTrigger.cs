@@ -9,16 +9,16 @@ public class TowerTrigger : MonoBehaviour {
     
 
 
-    void OnTriggerEnter(Collider other)
-	{
-		if(other.CompareTag("enemyBug") && !lockE)
-		{   
-			twr.target = other.gameObject.transform;            
-            curTarget = other.gameObject;
-			lockE = true;
-		}
+ //   void OnTriggerEnter(Collider other)
+	//{
+	//	if(other.CompareTag("enemyBug") && !lockE)
+	//	{   
+	//		twr.target = other.gameObject.transform;            
+ //           curTarget = other.gameObject;
+	//		lockE = true;
+	//	}
        
-    }
+ //   }
 	void Update()
 	{
         if (curTarget)
@@ -38,13 +38,13 @@ public class TowerTrigger : MonoBehaviour {
 			lockE = false;            
         }
 	}
-	void OnTriggerExit(Collider other)
-	{
-		if(other.CompareTag("enemyBug") && other.gameObject == curTarget)
-		{
-			lockE = false;
-            twr.target = null;            
-        }
-	}
+	//void OnTriggerExit(Collider other)
+	//{
+	//	if(other.CompareTag("enemyBug") && other.gameObject == curTarget)
+	//	{
+	//		lockE = false;
+ //           twr.target = null;            
+ //       }
+	//}
 	
 }
