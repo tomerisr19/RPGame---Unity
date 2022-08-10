@@ -5,14 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    public Animator anim;
-    public GameObject clickToBegin;
-
-    public void onClickBegin()
-    {
-        anim.enabled = true;
-        Destroy(clickToBegin);
-    }
+    
+   
 
     public void onNewGame()
     {
