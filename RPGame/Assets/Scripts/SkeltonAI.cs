@@ -54,6 +54,7 @@ public class SkeltonAI : MonoBehaviour
         }
         if (curHealth <= 0)
         {
+            isDie = true;
             Die();
         }
     }
@@ -62,8 +63,8 @@ public class SkeltonAI : MonoBehaviour
     {
         anim.SetTrigger("die");
         nav.enabled = false;
-        Destroy(gameObject, 2);
-        isDie = true;
+        Destroy(skeltonHealthSlider);
+        Destroy(gameObject, 1.5f);
     }
 
    
@@ -85,7 +86,7 @@ public class SkeltonAI : MonoBehaviour
             isAttaking = true;
             anim.SetBool("Attak", true);
             yield return new WaitForSeconds(1.2f);
-            playerData.TakeDamage(7);
+            playerData.TakeDamage(3);
             isAttaking = false;
         }
         

@@ -76,7 +76,7 @@ public class ErikaNPC : MonoBehaviour
     {
         anim.SetTrigger("die");
         nav.enabled = false;
-        Destroy(gameObject, 2);
+        //Destroy(gameObject, 2);
         isDie = true;
     }
 
@@ -93,8 +93,11 @@ public class ErikaNPC : MonoBehaviour
     //}
     private void LateUpdate()
     {
-
-        if (!skeltonAI.isDie)
+        if (skelton == null)
+        {
+            transform.LookAt(player.transform);
+        }
+        else
         {
             transform.LookAt(skelton.transform);
             if (updateTime > 2)
@@ -102,8 +105,7 @@ public class ErikaNPC : MonoBehaviour
                 nav.destination = skelton.transform.position;
                 updateTime = 0;
             }
-        }          
-        
+        }       
     }
 
 }
